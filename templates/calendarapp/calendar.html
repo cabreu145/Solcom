@@ -30,7 +30,6 @@
                           <p>Comienza: {{ event.start_time|date:'l j F  Y' }} {{ event.start_time.time|time:'h:i a' }} </p>
                           <p>Termina: {{ event.end_time|date:'l j F  Y' }} {{ event.end_time.time|time:'h:i a' }}</p>
                           <a  href="{% url 'calendarapp:event-detail' event.id %}" class="btn btn-light" role="button">Ver detalles</a>
-                          {{ event.end_time|date:'Y-m-d' }}
                       </div>
                     {% empty %}
                       <p>No tiene eventos en proceso</p>
@@ -88,19 +87,17 @@
   <script src="{% static 'calender/main.js' %}"></script>
   <script>
       document.addEventListener('DOMContentLoaded', function() {
-        var initialLocaleCode = 'es';
         var calendarEl = document.getElementById('calendar');
         var today = new Date();
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          locale: initialLocaleCode,
+          
     
           headerToolbar: {
             left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,list'
           },
-          locale: initialLocaleCode,
           
           initialDate: today,
           navLinks: true, // can click day/week names to navigate views
@@ -137,8 +134,9 @@
           ],
 
         });
-
+        
         calendar.render();
+        calendar.setOption('locale','es');
         
       });
       const closeBtn1 = document.getElementById('modalClose1');
