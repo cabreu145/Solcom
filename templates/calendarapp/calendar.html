@@ -30,6 +30,7 @@
                           <p>Comienza: {{ event.start_time|date:'l j F  Y' }} {{ event.start_time.time|time:'h:i a' }} </p>
                           <p>Termina: {{ event.end_time|date:'l j F  Y' }} {{ event.end_time.time|time:'h:i a' }}</p>
                           <a  href="{% url 'calendarapp:event-detail' event.id %}" class="btn btn-light" role="button">Ver detalles</a>
+                          {{ event.color }}
                       </div>
                     {% empty %}
                       <p>No tiene eventos en proceso</p>
@@ -67,6 +68,10 @@
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Finalización del Evento:</label>
                                     {{ form.end_time }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Color:</label>
+                                    {{ form.color }}
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -126,12 +131,15 @@
           events: [
             {% for event in events_month %}
             {
+              
               title: "{{ event.title }}",
               start: "{{ event.start_time|date:'Y-m-d H:i' }}",
-              end: "{{ event.end_time|date:'Y-m-d H:i' }}"
-            },
-            {% endfor %}
+              end: "{{ event.end_time|date:'Y-m-d H:i' }}",
+              color: '{{ event.color }}',   // an option!
+              
+            },{% endfor %}
           ],
+          
 
         });
         

@@ -22,15 +22,28 @@ class EventManager(models.Manager):
         return running_events
 
 
+
+
 class Event(EventAbstract):
     """ Event model """
+
+    array_choices= [
+        ('#FF0000', 'Rojo'),
+        ('#0000FF', 'Azul'),
+        ('#FFFF00', 'Amarillo'),
+        ('#800080', 'Morado'),
+        ]
+
+
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='events'
     )
-    title = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=200)
     description = models.TextField()
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+    color   = models.CharField(max_length=80, choices=array_choices)
 
     objects = EventManager()
 

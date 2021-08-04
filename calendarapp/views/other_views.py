@@ -75,7 +75,7 @@ def create_event(request):
 
 class EventEdit(generic.UpdateView):
     model = Event
-    fields = ['title', 'description', 'start_time', 'end_time']
+    fields = ['title', 'description', 'start_time', 'end_time','color']
     template_name = 'event.html'
 
 
